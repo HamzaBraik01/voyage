@@ -90,3 +90,30 @@ SET
     date_fin = '2024-06-20',
     places_disponsibles = 45
 WHERE id_activite = 1;
+
+DELETE FROM reservation
+WHERE id_reservation = 1;
+
+
+SELECT 
+    c.id_client,
+    c.nom,
+    c.prenom,
+    c.email,
+    a.id_activite,
+    a.titre,
+    a.description,
+    a.destination,
+    a.prix,
+    a.date_debut,
+    a.date_fin,
+    r.date_reservation,
+    r.statut
+FROM 
+    client c
+JOIN 
+    reservation r ON c.id_client = r.id_client
+JOIN 
+    activite a ON r.id_activite = a.id_activite
+WHERE 
+    c.id_client = 2;

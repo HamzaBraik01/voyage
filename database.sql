@@ -81,3 +81,12 @@ VALUES
 (5, 1, CURRENT_TIMESTAMP, 'Confirmée');
 
 
+UPDATE activite
+SET 
+    titre = 'Croisière sur le fleuve Bouregreg - Version Améliorée',
+    description = 'Croisière relaxante et exclusive sur le fleuve Bouregreg, avec des vues magnifiques et des services de luxe',
+    prix = 1500.00,
+    date_debut = '2024-06-05',
+    date_fin = '2024-06-20',
+    places_disponsibles = 45
+WHERE id_activite = 1;

@@ -44,7 +44,10 @@ ALTER TABLE activite
 MODIFY id_activite int AUTO_INCREMENT;
 
 ALTER TABLE reservation 
-ADD PRIMARY KEY (id_reservation);
+ADD PRIMARY KEY (id_reservation); 
+
+ALTER TABLE reservation 
+MODIFY id_reservation int AUTO_INCREMENT;
 
 
 ALTER TABLE reservation
@@ -67,3 +70,14 @@ VALUES
 ('Séjour culturel à Marrakech', 'Visite des souks, des jardins et des monuments de Marrakech', 'Marrakech', 800.00, '2024-08-05', '2024-08-12', 40),
 ('Safari dans le parc national de Souss-Massa', 'Observation de la faune et découverte de la région', 'Souss-Massa', 2500.00, '2024-09-15', '2024-09-30', 20),
 ('Séjour bien-être à Essaouira', 'Séjour de relaxation et spa au bord de la mer', 'Essaouira', 1500.00, '2024-10-01', '2024-10-15', 25);
+
+
+INSERT INTO reservation (id_client, id_activite, date_reservation, statut)
+VALUES 
+(1, 2, CURRENT_TIMESTAMP, 'EN attente'),
+(2, 3, CURRENT_TIMESTAMP, 'Confirmée'),
+(3, 4, CURRENT_TIMESTAMP, 'Annulée'),
+(4, 5, CURRENT_TIMESTAMP, 'EN attente'),
+(5, 1, CURRENT_TIMESTAMP, 'Confirmée');
+
+

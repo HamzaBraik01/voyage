@@ -1,58 +1,42 @@
-create database voyage;
 
-create table client (
-    id_client int ,
-    nom varchar(100),
-    prenom varchar(100),
-    email varchar(150),
-    telephone varchar(15),
-    adresse text,
+CREATE DATABASE voyage1;
+
+USE voyage1;
+
+
+CREATE TABLE client (
+    id_client INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100),
+    prenom VARCHAR(100),
+    email VARCHAR(150) UNIQUE,
+    telephone VARCHAR(15),
+    adresse TEXT,
     date_naissance DATE
 );
 
-create table reservation( 
-    id_reservation int, 
-    id_client int, 
-    id_activite int, 
-    date_reservation TIMESTAMP,
-    statut ENUM('EN attente', 'Confirmée', 'Annulée') 
-);
 
-create table activite(
-    id_activite int,
-    titre varchar(150),
-    description text,
-    destination varchar(100),
+CREATE TABLE activite (
+    id_activite INT AUTO_INCREMENT PRIMARY KEY,
+    titre VARCHAR(150),
+    description TEXT,
+    destination VARCHAR(100),
     prix DECIMAL(10, 2) NOT NULL,
-    date_debut date,
-    date_fin date,
-    places_disponsibles int NOT NULL
-    
+    date_debut DATE,
+    date_fin DATE,
+    places_disponsibles INT NOT NULL
 );
 
 
-ALTER TABLE client 
-ADD PRIMARY KEY (id_client, email);
+CREATE TABLE reservation (
+    id_reservation INT AUTO_INCREMENT PRIMARY KEY,
+    id_client INT,
+    id_activite INT,
+    date_reservation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    statut ENUM('EN attente', 'Confirmée', 'Annulée'),
+    FOREIGN KEY (id_client) REFERENCES client (id_client) ON DELETE CASCADE ,
+    FOREIGN KEY (id_activite) REFERENCES activite (id_activite) 
+);
 
-ALTER TABLE client
-MODIFY id_client int AUTO_INCREMENT;
-
-ALTER TABLE activite 
-ADD PRIMARY KEY (id_activite);
-
-ALTER TABLE activite
-MODIFY id_activite int AUTO_INCREMENT;
-
-ALTER TABLE reservation 
-ADD PRIMARY KEY (id_reservation); 
-
-ALTER TABLE reservation 
-MODIFY id_reservation int AUTO_INCREMENT;
-
-
-ALTER TABLE reservation
-ADD FOREIGN KEY (id_client) REFERENCES client (id_client),
-ADD FOREIGN KEY (id_activite) REFERENCES activite (id_activite);
 
 INSERT INTO client (nom, prenom, email, telephone, adresse, date_naissance)
 VALUES 
@@ -62,6 +46,7 @@ VALUES
 ('El Fassi', 'Samira', 'samira.elfassi@example.com', '0654321098', '321 rue des Oliviers, Fès', '1995-03-11'),
 ('Ait Lahcen', 'Mohammed', 'mohammed.aitlahcen@example.com', '0687654321', '654 impasse des Jardins, Agadir', '1992-06-25'),
 ('El Hamrei', 'aida', 'aida.elfassi@example.com', '0685321098', '321 rue des Oliviers, Safi', '1995-03-11');
+
 
 INSERT INTO activite (titre, description, destination, prix, date_debut, date_fin, places_disponsibles)
 VALUES 
@@ -91,6 +76,7 @@ SET
     places_disponsibles = 45
 WHERE id_activite = 1;
 
+
 DELETE FROM reservation
 WHERE id_reservation = 1;
 
@@ -117,3 +103,4 @@ JOIN
     activite a ON r.id_activite = a.id_activite
 WHERE 
     c.id_client = 2;
+

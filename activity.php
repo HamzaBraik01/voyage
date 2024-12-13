@@ -2,7 +2,7 @@
 include 'connexion.php';
 ob_start();
 
-// Insert Client Function
+
 function insertrActivite($titre, $description, $destination, $prix, $dateDebut, $dateFin, $placesDisponibles) { 
     include 'connexion.php';
     $titre = mysqli_real_escape_string($con, $titre);

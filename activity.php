@@ -5,8 +5,6 @@ ob_start();
 // Insert Client Function
 function insertrActivite($titre, $description, $destination, $prix, $dateDebut, $dateFin, $placesDisponibles) { 
     include 'connexion.php';
-    
-    // Sécuriser les données pour éviter les injections SQL
     $titre = mysqli_real_escape_string($con, $titre);
     $description = mysqli_real_escape_string($con, $description);
     $destination = mysqli_real_escape_string($con, $destination);
@@ -14,27 +12,18 @@ function insertrActivite($titre, $description, $destination, $prix, $dateDebut, 
     $dateDebut = mysqli_real_escape_string($con, $dateDebut);
     $dateFin = mysqli_real_escape_string($con, $dateFin);
     $placesDisponibles = mysqli_real_escape_string($con, $placesDisponibles);
+    $requete = "INSERT INTO activite (titre, description, destination, prix, date_debut, date_fin, places_disponsibles) 
+            VALUES ('$titre', '$description', '$destination', '$prix', '$dateDebut', '$dateFin', '$placesDisponibles')";
 
-    // Requête SQL pour insérer une nouvelle réservation dans la base de données
-    $requete = "INSERT INTO activite (titre, description, destination, prix, date_debut, date_fin, places_disponibles) 
-                VALUES ('$titre', '$description', '$destination', '$prix', '$dateDebut', '$dateFin', '$placesDisponibles')";
-    
-    // Exécution de la requête
     $query = mysqli_query($con, $requete);
     
-    // Vérifier si l'insertion a réussi
-    if ($query) {
-        return true; // Réservation insérée avec succès
-    } else {
-        return false; // Échec de l'insertion
-    }
 }
 
 
-// Fetch Clients Function
+
 function fetchActivite() {
     include 'connexion.php';
-    $sql = "SELECT * FROM activite"; // Requête pour récupérer toutes les réservations
+    $sql = "SELECT * FROM activite"; 
     $result = mysqli_query($con, $sql);
 
     if ($result) {
@@ -44,9 +33,9 @@ function fetchActivite() {
                     <td class='border border-gray-300 px-4 py-2'>{$row['description']}</td>
                     <td class='border border-gray-300 px-4 py-2'>{$row['destination']}</td>
                     <td class='border border-gray-300 px-4 py-2'>{$row['prix']}</td>
+                    <td class='border border-gray-300 px-4 py-2'>{$row['places_disponsibles']}</td>
                     <td class='border border-gray-300 px-4 py-2'>{$row['date_debut']}</td>
                     <td class='border border-gray-300 px-4 py-2'>{$row['date_fin']}</td>
-                    <td class='border border-gray-300 px-4 py-2'>{$row['places_disponibles']}</td>
                     <td class='border border-gray-300 px-4 py-2'>
                         <!-- Container for buttons -->
                         <div class='flex space-x-3'>
@@ -62,7 +51,7 @@ function fetchActivite() {
                                     </g>
                                 </svg>
                             </button>
-
+                            
                             <!-- Supprimer Icon -->
                             <button class='bg-transparent text-red-500 p-2 rounded-full hover:bg-red-100'>
                                 <svg fill='#ec0909' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' class='w-5 h-5'>
@@ -148,7 +137,7 @@ mysqli_close($con);
     </div>
 
 
-    <!-- Main Content -->
+    
         <!-- Main Content -->
         <div class="flex-1 p-10 sm:ml-0 md:ml-30 overflow-y-auto  ">
         <h1 class="text-3xl font-bold mb-6">Bienvenue au tableau de bord</h1>
@@ -164,7 +153,8 @@ mysqli_close($con);
                         <th class="border border-gray-300 px-4 py-2">Destination</th>
                         <th class="border border-gray-300 px-4 py-2">Prix</th>
                         <th class="border border-gray-300 px-4 py-2">Places Disponibles</th>
-                        <th class="border border-gray-300 px-4 py-2">Dates</th>
+                        <th class="border border-gray-300 px-4 py-2">Date de Début</th>
+                        <th class="border border-gray-300 px-4 py-2">Date de Fin</th>
                         <th class="border border-gray-300 px-4 py-2">Actions</th>
                     </tr>
                 </thead>

@@ -2,7 +2,6 @@
 include 'connexion.php';
 ob_start();
 
-// Insert Client Function
 function insertClient($nom, $prenom, $email, $telephone, $adresse, $dateNaissance) {
     include 'connexion.php';
     $nom = mysqli_real_escape_string($con, $nom);
@@ -17,7 +16,6 @@ function insertClient($nom, $prenom, $email, $telephone, $adresse, $dateNaissanc
     $query = mysqli_query($con, $requete);
 }
 
-// Fetch Clients Function
 function fetchClients() {
     include 'connexion.php';
     $sql = "SELECT * FROM client";
@@ -131,13 +129,12 @@ mysqli_close($con);
     </div>
 
 
-    <!-- Main Content -->
-        <!-- Main Content -->
+        
         <div class="flex-1 p-10 sm:ml-0 md:ml-30 overflow-y-auto  ">
         <h1 class="text-3xl font-bold mb-6">Gestion Les clients </h1>
         <button id="addClientBtn" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">Ajouter un Client</button>
 
-        <!-- Table for Displaying Data -->
+
         <div class="mt-10 ">
             <table class="min-w-full max-w-4xl mx-auto table-auto border-collapse border border-gray-300 bg-white">
                 <thead>

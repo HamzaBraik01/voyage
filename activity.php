@@ -132,7 +132,7 @@ mysqli_close($con);
             <a href="activity.php" class="block py-2 px-4 rounded hover:bg-blue-700 sm:text-xs md:text-base">Ajouter une Activité</a>
         </nav>
         <div class="p-4 border-t border-blue-500">
-            <a href="#" class="block py-2 px-4 text-sm text-gray-200 hover:text-white">Déconnexion</a>
+            <a href="index.php" class="block py-2 px-4 text-sm text-gray-200 hover:text-white">Déconnexion</a>
         </div>
     </div>
 
@@ -140,7 +140,7 @@ mysqli_close($con);
     
         <!-- Main Content -->
         <div class="flex-1 p-10 sm:ml-0 md:ml-30 overflow-y-auto  ">
-        <h1 class="text-3xl font-bold mb-6">Bienvenue au tableau de bord</h1>
+        <h1 class="text-3xl font-bold mb-6">Gestion Les Activits</h1>
         <button id="addClientBtn" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">Ajouter une Activité</button>
 
         <!-- Table for Displaying Data -->
